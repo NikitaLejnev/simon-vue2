@@ -4,11 +4,7 @@
       <h1>Simon Game</h1>
     </header>
 
-    <div class="tile-container js-container unclickable">
-      <template v-for="tile in tiles">
-        <color-tile :color="tile.color" :key="tile.color"></color-tile>
-      </template>
-    </div>
+    <tile-container :tiles="tiles"></tile-container>
 
     <footer class="info-section">
       <button
@@ -43,17 +39,17 @@
 </template>
 
 <script>
-import ColorTile from "./components/ColorTile.vue";
+import TileContainer from "./components/TileContainer.vue";
 export default {
   name: "App",
-  components: { "color-tile": ColorTile },
+  components: { "tile-container": TileContainer },
   data() {
     return {
       tiles: [
-        { color: "red" },
-        { color: "green" },
-        { color: "blue" },
-        { color: "yellow" },
+        { color: "red", active: false },
+        { color: "green", active: false },
+        { color: "blue", active: false },
+        { color: "yellow", active: false },
       ],
       gameStarted: false,
       sequence: [],
@@ -86,6 +82,19 @@ export default {
     nextStep: function () {
       const randomIndex = Math.floor(Math.random() * this.tiles.length);
       return this.tiles[randomIndex];
+    },
+    activateTile: function (tile) {
+      tile.active = true;
+      setTimeout(() => {
+        tile.active = false;
+      }, 300);
+    },
+    playRound: function () {
+      this.nextSequence.forEach((tile, index) => {
+        setTimeout(() => {
+          this.activateTile(tile);
+        }, (index + 1) * 600);
+      });
     },
   },
 };

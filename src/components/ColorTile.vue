@@ -1,22 +1,22 @@
 <template>
-  <div class="tile" :data-tile="color" :class="className"></div>
+  <div
+    class="tile"
+    :data-tile="color"
+    :id="color"
+    :class="{ activated: isActivated }"
+  ></div>
 </template>
 
 <script>
 export default {
   name: "ColorTile",
-  props: ["color"],
+  props: ["color", "active"],
   computed: {
-    className: {
+    isActivated: {
       get: function () {
-        return `tile-${this.color}`;
+        return this.active;
       },
     },
-  },
-  data() {
-    return {
-      active: false,
-    };
   },
 };
 </script>
