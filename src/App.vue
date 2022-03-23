@@ -14,12 +14,12 @@
     <footer class="info-section">
       <button
         class="start-button"
-        :class="{ hidden: isHidden }"
+        :class="{ hidden: isStartButtonHidden }"
         @click="startGame()"
       >
         Start
       </button>
-      <span class="info js-info hidden"></span>
+      <span class="info" :class="{ hidden: isInfoShown }">Observe ...</span>
     </footer>
 
     <div class="hidden">
@@ -50,19 +50,36 @@ export default {
     return {
       gameStarted: false,
       sequence: [],
+      nextSequence: [],
       playerSequence: [],
+      level: 0,
     };
   },
   computed: {
-    isHidden: {
+    isStartButtonHidden: {
       get: function () {
         return this.gameStarted;
+      },
+    },
+    isInfoShown: {
+      get: function () {
+        return !this.gameStarted;
       },
     },
   },
   methods: {
     startGame: function () {
       this.gameStarted = true;
+    },
+    nextRound: function () {
+      this.level += 1;
+      const newStep = this.nextStep();
+      this.nextSequence.push(newStep);
+    },
+    nextStep: function () {
+      const tiles = ["red", "green", "blue", "yellow"];
+      const randomIndex = Math.floor(Math.random() * tiles.length);
+      return tiles[randomIndex];
     },
   },
 };
