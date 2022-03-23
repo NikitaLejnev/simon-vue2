@@ -16,25 +16,6 @@
       </button>
       <span class="info" :class="{ hidden: isInfoShown }">Observe ...</span>
     </footer>
-
-    <div class="hidden">
-      <audio
-        src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"
-        data-sound="red"
-      ></audio>
-      <audio
-        src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"
-        data-sound="green"
-      ></audio>
-      <audio
-        src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"
-        data-sound="blue"
-      ></audio>
-      <audio
-        src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
-        data-sound="yellow"
-      ></audio>
-    </div>
   </main>
 </template>
 
@@ -46,10 +27,34 @@ export default {
   data() {
     return {
       tiles: [
-        { color: "red", active: false },
-        { color: "green", active: false },
-        { color: "blue", active: false },
-        { color: "yellow", active: false },
+        {
+          color: "red",
+          active: false,
+          sound: new Audio(
+            "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"
+          ),
+        },
+        {
+          color: "green",
+          active: false,
+          sound: new Audio(
+            "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"
+          ),
+        },
+        {
+          color: "blue",
+          active: false,
+          sound: new Audio(
+            "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"
+          ),
+        },
+        {
+          color: "yellow",
+          active: false,
+          sound: new Audio(
+            "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
+          ),
+        },
       ],
       gameStarted: false,
       sequence: [],
@@ -73,11 +78,13 @@ export default {
   methods: {
     startGame: function () {
       this.gameStarted = true;
+      this.nextRound();
     },
     nextRound: function () {
       this.level += 1;
       const newStep = this.nextStep();
       this.nextSequence.push(newStep);
+      this.playRound(this.nextSequence);
     },
     nextStep: function () {
       const randomIndex = Math.floor(Math.random() * this.tiles.length);
@@ -85,6 +92,7 @@ export default {
     },
     activateTile: function (tile) {
       tile.active = true;
+      tile.sound.play();
       setTimeout(() => {
         tile.active = false;
       }, 300);
