@@ -12,7 +12,13 @@
     </section>
 
     <footer class="info-section">
-      <button class="start-button js-start">Start</button>
+      <button
+        class="start-button"
+        :class="{ hidden: isHidden }"
+        @click="startGame()"
+      >
+        Start
+      </button>
       <span class="info js-info hidden"></span>
     </footer>
 
@@ -40,7 +46,25 @@
 <script>
 export default {
   name: "App",
-  components: {},
+  data() {
+    return {
+      gameStarted: false,
+      sequence: [],
+      playerSequence: [],
+    };
+  },
+  computed: {
+    isHidden: {
+      get: function () {
+        return this.gameStarted;
+      },
+    },
+  },
+  methods: {
+    startGame: function () {
+      this.gameStarted = true;
+    },
+  },
 };
 </script>
 
