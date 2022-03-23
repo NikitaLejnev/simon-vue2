@@ -68,7 +68,6 @@ export default {
       ],
       gameStarted: false,
       sequence: [],
-      nextSequence: [],
       playerTurn: false,
       playerSequence: [],
       roundWon: false,
@@ -124,12 +123,11 @@ export default {
 
       this.playerTurn = false;
       const newStep = this.nextStep();
-      this.nextSequence.push(newStep);
-      this.playRound(this.nextSequence);
+      this.sequence.push(newStep);
+      this.playRound(this.sequence);
 
-      this.sequence = [...this.nextSequence];
       setTimeout(() => {
-        this.startPlayerTurn();
+        this.playerTurn = true;
       }, this.level * 600 + 1000);
     },
     nextStep: function () {
@@ -144,30 +142,44 @@ export default {
       }, 300);
     },
     playRound: function () {
-      this.nextSequence.forEach((tile, index) => {
+      this.sequence.forEach((tile, index) => {
         setTimeout(() => {
           this.activateTile(tile);
         }, (index + 1) * 600);
       });
     },
-    startPlayerTurn: function () {
-      this.playerTurn = true;
-    },
     handleTileClick: function (id) {
-      const clickedTile = this.findTileById(id);
-      this.playerSequence.push(clickedTile);
-      if (this.playerSequence.length === this.sequence.length) {
-        this.roundWon = true;
-        this.playerSequence = [];
-        setTimeout(() => {
-          this.roundWon = false;
-          this.nextRound();
-        }, 1000);
-        return;
+      if (this.playerTurn) {
+        const clickedTile = this.findTileById(id);
+        clickedTile.sound.play();
+        this.playerSequence.push(clickedTile);
+        const index = this.playerSequence.length - 1;
+
+        if (this.sequence[index] !== this.playerSequence[index]) {
+          this.resetGame("Wrong tile. Game over.");
+          return;
+        }
+        if (this.playerSequence.length === this.sequence.length) {
+          this.roundWon = true;
+          this.playerSequence = [];
+          setTimeout(() => {
+            this.roundWon = false;
+            this.nextRound();
+          }, 1000);
+          return;
+        }
       }
     },
     findTileById: function (id) {
       return this.tiles.find((tile) => tile.id === id);
+    },
+    resetGame: function (message) {
+      alert(message);
+      this.gameStarted = false;
+      this.playerTurn = false;
+      this.sequence = [];
+      this.playerSequence = [];
+      this.level = 0;
     },
   },
 };
