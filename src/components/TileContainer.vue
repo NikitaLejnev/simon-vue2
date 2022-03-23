@@ -7,6 +7,7 @@
       v-for="tile in tiles"
       v-bind="tile"
       :key="tile.color"
+      @tile-click="$emit('tile-click', $event)"
     ></color-tile>
   </div>
 </template>

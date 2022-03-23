@@ -7,6 +7,7 @@
     <tile-container
       :tiles="tiles"
       :isUnclickable="areTilesUnclickable"
+      @tile-click="handleTileClick"
     ></tile-container>
 
     <footer class="info-section">
@@ -18,7 +19,7 @@
         Start
       </button>
       <span class="info" :class="{ hidden: isInfoShown }">{{
-        this.playerTurn === true ? `Pick ${this.level} tiles` : "Observe ..."
+        this.infoText
       }}</span>
     </footer>
   </main>
@@ -33,6 +34,7 @@ export default {
     return {
       tiles: [
         {
+          id: "red",
           color: "red",
           active: false,
           sound: new Audio(
@@ -40,6 +42,7 @@ export default {
           ),
         },
         {
+          id: "green",
           color: "green",
           active: false,
           sound: new Audio(
@@ -47,6 +50,7 @@ export default {
           ),
         },
         {
+          id: "blue",
           color: "blue",
           active: false,
           sound: new Audio(
@@ -54,6 +58,7 @@ export default {
           ),
         },
         {
+          id: "yellow",
           color: "yellow",
           active: false,
           sound: new Audio(
@@ -66,6 +71,7 @@ export default {
       nextSequence: [],
       playerTurn: false,
       playerSequence: [],
+      roundWon: false,
       level: 0,
     };
   },
@@ -89,6 +95,23 @@ export default {
       get: function () {
         return this.level > 0 ? `Level ${this.level}` : "Simon Game";
       },
+    },
+    infoText: {
+      get: function () {
+        if (this.roundWon) {
+          return "Correct! Onto the next level.";
+        } else {
+          if (this.playerTurn) {
+            return `Pick ${this.remainingTaps} tile${
+              this.remainingTaps > 1 ? "s" : ""
+            }`;
+          }
+          return "Observe ...";
+        }
+      },
+    },
+    remainingTaps: function () {
+      return this.sequence.length - this.playerSequence.length;
     },
   },
   methods: {
@@ -129,6 +152,22 @@ export default {
     },
     startPlayerTurn: function () {
       this.playerTurn = true;
+    },
+    handleTileClick: function (id) {
+      const clickedTile = this.findTileById(id);
+      this.playerSequence.push(clickedTile);
+      if (this.playerSequence.length === this.sequence.length) {
+        this.roundWon = true;
+        this.playerSequence = [];
+        setTimeout(() => {
+          this.roundWon = false;
+          this.nextRound();
+        }, 1000);
+        return;
+      }
+    },
+    findTileById: function (id) {
+      return this.tiles.find((tile) => tile.id === id);
     },
   },
 };
