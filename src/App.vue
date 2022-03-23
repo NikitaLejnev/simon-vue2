@@ -4,7 +4,10 @@
       <h1>Simon Game</h1>
     </header>
 
-    <tile-container :tiles="tiles"></tile-container>
+    <tile-container
+      :tiles="tiles"
+      :isUnclickable="areTilesUnclickable"
+    ></tile-container>
 
     <footer class="info-section">
       <button
@@ -14,7 +17,9 @@
       >
         Start
       </button>
-      <span class="info" :class="{ hidden: isInfoShown }">Observe ...</span>
+      <span class="info" :class="{ hidden: isInfoShown }">{{
+        this.playerTurn === true ? `Pick ${this.level} tiles` : "Observe ..."
+      }}</span>
     </footer>
   </main>
 </template>
@@ -59,6 +64,7 @@ export default {
       gameStarted: false,
       sequence: [],
       nextSequence: [],
+      playerTurn: false,
       playerSequence: [],
       level: 0,
     };
@@ -74,6 +80,11 @@ export default {
         return !this.gameStarted;
       },
     },
+    areTilesUnclickable: {
+      get: function () {
+        return !this.playerTurn;
+      },
+    },
   },
   methods: {
     startGame: function () {
@@ -82,9 +93,16 @@ export default {
     },
     nextRound: function () {
       this.level += 1;
+
+      this.playerTurn = false;
       const newStep = this.nextStep();
       this.nextSequence.push(newStep);
       this.playRound(this.nextSequence);
+
+      this.sequence = [...this.nextSequence];
+      setTimeout(() => {
+        this.startPlayerTurn();
+      }, this.level * 600 + 1000);
     },
     nextStep: function () {
       const randomIndex = Math.floor(Math.random() * this.tiles.length);
@@ -103,6 +121,9 @@ export default {
           this.activateTile(tile);
         }, (index + 1) * 600);
       });
+    },
+    startPlayerTurn: function () {
+      this.playerTurn = true;
     },
   },
 };
