@@ -1,7 +1,7 @@
 <template>
   <main class="game">
     <header>
-      <h1>Simon Game</h1>
+      <h1>{{ this.headerText }}</h1>
     </header>
 
     <tile-container
@@ -83,6 +83,11 @@ export default {
     areTilesUnclickable: {
       get: function () {
         return !this.playerTurn;
+      },
+    },
+    headerText: {
+      get: function () {
+        return this.level > 0 ? `Level ${this.level}` : "Simon Game";
       },
     },
   },
