@@ -117,11 +117,8 @@ export default {
       }, 300);
     },
     playRound: function () {
-      const userInputDelay = 500;
       this.displaySequence();
-      setTimeout(() => {
-        this.playerTurn = true;
-      }, this.level * this.newTileDelay + userInputDelay);
+      this.waitBeforePlayerTurn();
     },
     displaySequence: function () {
       this.sequence.forEach((tile, index) => {
@@ -129,6 +126,12 @@ export default {
           this.activateTile(tile);
         }, (index + 1) * this.newTileDelay);
       });
+    },
+    waitBeforePlayerTurn: function () {
+      const userInputDelay = 500;
+      setTimeout(() => {
+        this.playerTurn = true;
+      }, this.level * this.newTileDelay + userInputDelay);
     },
     handleTileClick: function (id) {
       const clickedTile = this.findTileById(id);
