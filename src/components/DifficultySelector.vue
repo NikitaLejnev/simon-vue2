@@ -3,6 +3,7 @@
     <button
       v-for="difficultyLevel in difficultyLevels"
       :key="difficultyLevel.id"
+      @click="$emit('select-difficulty', difficultyLevel.id)"
     >
       {{ difficultyLevel.name }}
     </button>

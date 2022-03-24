@@ -18,7 +18,9 @@
       >
         Start
       </button>
-      <difficulty-selector></difficulty-selector>
+      <difficulty-selector
+        @select-difficulty="handleSelectDifficulty"
+      ></difficulty-selector>
       <span class="info" :class="{ hidden: isInfoShown }">{{
         this.infoText
       }}</span>
@@ -175,6 +177,19 @@ export default {
           }, 1000);
           return;
         }
+      }
+    },
+    handleSelectDifficulty: function (id) {
+      switch (id) {
+        case "easy":
+          this.newTileDelay = 1500;
+          break;
+        case "medium":
+          this.newTileDelay = 1000;
+          break;
+        case "hard":
+          this.newTileDelay = 400;
+          break;
       }
     },
     findTileById: function (id) {
