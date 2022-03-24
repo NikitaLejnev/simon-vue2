@@ -19,6 +19,7 @@
         Start
       </button>
       <difficulty-selector
+        :class="{ hidden: isStartButtonHidden }"
         @select-difficulty="handleSelectDifficulty"
       ></difficulty-selector>
       <span class="info" :class="{ hidden: isInfoShown }">{{
