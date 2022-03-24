@@ -31,15 +31,6 @@ body {
   visibility: hidden;
 }
 
-header {
-  text-align: center;
-  font-size: 18px;
-}
-
-.heading {
-  font-size: 3em;
-}
-
 .info-section {
   text-align: center;
 }
@@ -53,10 +44,6 @@ header {
     width: 100%;
     padding-left: 20px;
     padding-right: 20px;
-  }
-
-  .heading {
-    font-size: 2em;
   }
 
   .tile-container {

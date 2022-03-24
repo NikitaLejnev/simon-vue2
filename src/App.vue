@@ -1,8 +1,6 @@
 <template>
   <main class="game">
-    <header>
-      <h1>{{ this.headerText }}</h1>
-    </header>
+    <page-header>{{ this.headerText }}</page-header>
 
     <tile-container
       :tiles="tiles"
@@ -28,6 +26,7 @@
 
 <script>
 import DifficultySelector from "./components/DifficultySelector.vue";
+import PageHeader from "./components/PageHeader.vue";
 import StartButton from "./components/StartButton.vue";
 import TileContainer from "./components/TileContainer.vue";
 export default {
@@ -36,6 +35,7 @@ export default {
     "tile-container": TileContainer,
     "difficulty-selector": DifficultySelector,
     "start-button": StartButton,
+    "page-header": PageHeader,
   },
   data() {
     return {
