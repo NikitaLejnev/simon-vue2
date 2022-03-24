@@ -93,21 +93,21 @@ header {
 }
 
 #yellow {
-  background-color: #ffb900;
-  box-shadow: 0 0 0 1px #ffb900 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #c28e07, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+  background-color: #ffbb00dc;
+  box-shadow: 0 0 0 1px #ffbb00dc inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #c28e07, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
   transition: 0.15s;
 }
 
 #yellow:hover,
 #yellow:focus {
-  background-color: #ffb900;
-  box-shadow: 0 0 0 1px #ffb900 inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #c28e07, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+  background-color: #e7ae0f;
+  box-shadow: 0 0 0 1px #e7ae0f inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #c28e07, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
 }
 
 #yellow:active,
 #yellow.activated {
-  box-shadow: 0 0 0 1px #ffca3d inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 0 0 1px rgba(0, 0, 0, 0.4);
-  background-color: #ffca3d;
+  box-shadow: 0 0 0 1px #ffcb3a inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 0 0 1px rgba(0, 0, 0, 0.4);
+  background-color: #ffcb3a;
   transform: translateY(10px);
 }
 
@@ -134,7 +134,7 @@ header {
   text-align: center;
 }
 
-.start-button {
+button {
   display: inline-block;
   height: 38px;
   padding: 0 30px;
@@ -153,7 +153,7 @@ header {
   cursor: pointer;
 }
 
-.start-button:hover {
+button:hover {
   color: #333;
   border-color: #888;
   outline: 0;

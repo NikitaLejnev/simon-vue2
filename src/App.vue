@@ -18,6 +18,7 @@
       >
         Start
       </button>
+      <difficulty-selector></difficulty-selector>
       <span class="info" :class="{ hidden: isInfoShown }">{{
         this.infoText
       }}</span>
@@ -26,10 +27,14 @@
 </template>
 
 <script>
+import DifficultySelector from "./components/DifficultySelector.vue";
 import TileContainer from "./components/TileContainer.vue";
 export default {
   name: "App",
-  components: { "tile-container": TileContainer },
+  components: {
+    "tile-container": TileContainer,
+    "difficulty-selector": DifficultySelector,
+  },
   data() {
     return {
       tiles: [
@@ -72,6 +77,8 @@ export default {
       playerSequence: [],
       roundWon: false,
       level: 0,
+      difficulty: "easy",
+      newTileDelay: 1500,
     };
   },
   computed: {
@@ -125,10 +132,6 @@ export default {
       const newStep = this.nextStep();
       this.sequence.push(newStep);
       this.playRound(this.sequence);
-
-      setTimeout(() => {
-        this.playerTurn = true;
-      }, this.level * 600 + 1000);
     },
     nextStep: function () {
       const randomIndex = Math.floor(Math.random() * this.tiles.length);
@@ -142,11 +145,15 @@ export default {
       }, 300);
     },
     playRound: function () {
+      const userInputDelay = 500;
       this.sequence.forEach((tile, index) => {
         setTimeout(() => {
           this.activateTile(tile);
-        }, (index + 1) * 600);
+        }, (index + 1) * this.newTileDelay);
       });
+      setTimeout(() => {
+        this.playerTurn = true;
+      }, this.level * this.newTileDelay + userInputDelay);
     },
     handleTileClick: function (id) {
       if (this.playerTurn) {
