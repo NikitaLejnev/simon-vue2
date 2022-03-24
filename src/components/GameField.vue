@@ -137,8 +137,10 @@ export default {
       const clickedTile = this.findTileById(id);
       clickedTile.sound.play();
       this.playerSequence.push(clickedTile);
+      this.determineTurnOutcome();
+    },
+    determineTurnOutcome: function () {
       const index = this.playerSequence.length - 1;
-
       if (this.sequence[index] !== this.playerSequence[index]) {
         return this.resetGame("Wrong tile. Game over.");
       }
