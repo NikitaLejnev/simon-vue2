@@ -15,6 +15,7 @@ export default {
 <style>
 header {
   text-align: center;
+  margin-top: 1rem;
   font-size: 18px;
 }
 
