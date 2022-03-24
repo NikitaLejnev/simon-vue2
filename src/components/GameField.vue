@@ -8,7 +8,7 @@
 
     <info-section
       @game-start="this.startGame"
-      @select-difficulty="this.onSelectDifficulty"
+      @select-difficulty="newTileDelay = $event"
       :gameStatus="this.gameStarted"
       >{{ this.infoText }}</info-section
     >
@@ -97,11 +97,11 @@ export default {
       this.level += 1;
 
       this.playerTurn = false;
-      const newStep = this.nextStep();
-      this.sequence.push(newStep);
+      const newTile = this.nextTile();
+      this.sequence.push(newTile);
       this.playRound();
     },
-    nextStep: function () {
+    nextTile: function () {
       const randomIndex = Math.floor(Math.random() * this.tiles.length);
       return this.tiles[randomIndex];
     },
@@ -151,9 +151,6 @@ export default {
         this.roundWon = false;
         this.nextRound();
       }, this.newTileDelay);
-    },
-    onSelectDifficulty: function (delay) {
-      this.newTileDelay = delay;
     },
     findTileByColor: function (color) {
       return this.tiles.find((tile) => tile.color === color);

@@ -2,7 +2,7 @@
   <section id="info-section">
     <start-button
       :class="{ hidden: isGameOn }"
-      @game-start="$emit('game-start', $event)"
+      @game-start="$emit('game-start')"
     ></start-button>
     <difficulty-selector
       :class="{ hidden: isGameOn }"

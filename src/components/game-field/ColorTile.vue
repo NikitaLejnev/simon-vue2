@@ -1,7 +1,6 @@
 <template>
   <div
     class="tile"
-    :data-tile="color"
     :id="color"
     :class="{ activated: isActivated }"
     @click="$emit('tile-click', color)"
