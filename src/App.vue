@@ -10,7 +10,7 @@
       @tile-click="handleTileClick"
     ></tile-container>
 
-    <footer class="info-section">
+    <section class="info-section">
       <start-button
         @game-start="this.startGame"
         :class="{ hidden: isGameOn }"
@@ -19,10 +19,10 @@
         :class="{ hidden: isGameOn }"
         @select-difficulty="handleSelectDifficulty"
       ></difficulty-selector>
-      <span class="info" :class="{ hidden: isInfoShown }">{{
+      <span class="info" :class="{ hidden: !isGameOn }">{{
         this.infoText
       }}</span>
-    </footer>
+    </section>
   </main>
 </template>
 
@@ -87,11 +87,6 @@ export default {
     isGameOn: {
       get: function () {
         return this.gameStarted;
-      },
-    },
-    isInfoShown: {
-      get: function () {
-        return !this.gameStarted;
       },
     },
     areTilesUnclickable: {
