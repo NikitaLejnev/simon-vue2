@@ -2,16 +2,16 @@
   <div
     class="tile"
     :data-tile="color"
-    :id="id"
+    :id="color"
     :class="{ activated: isActivated }"
-    @click="$emit('tile-click', id)"
+    @click="$emit('tile-click', color)"
   ></div>
 </template>
 
 <script>
 export default {
   name: "ColorTile",
-  props: ["color", "active", "id"],
+  props: ["color", "active"],
   computed: {
     isActivated: {
       get: function () {

@@ -28,7 +28,6 @@ export default {
     return {
       tiles: [
         {
-          id: "red",
           color: "red",
           active: false,
           sound: new Audio(
@@ -36,7 +35,6 @@ export default {
           ),
         },
         {
-          id: "green",
           color: "green",
           active: false,
           sound: new Audio(
@@ -44,7 +42,6 @@ export default {
           ),
         },
         {
-          id: "blue",
           color: "blue",
           active: false,
           sound: new Audio(
@@ -52,7 +49,6 @@ export default {
           ),
         },
         {
-          id: "yellow",
           color: "yellow",
           active: false,
           sound: new Audio(
@@ -103,7 +99,7 @@ export default {
       this.playerTurn = false;
       const newStep = this.nextStep();
       this.sequence.push(newStep);
-      this.playRound(this.sequence);
+      this.playRound();
     },
     nextStep: function () {
       const randomIndex = Math.floor(Math.random() * this.tiles.length);
@@ -133,8 +129,8 @@ export default {
         this.playerTurn = true;
       }, this.level * this.newTileDelay + userInputDelay);
     },
-    handleTileClick: function (id) {
-      const clickedTile = this.findTileById(id);
+    handleTileClick: function (color) {
+      const clickedTile = this.findTileByColor(color);
       clickedTile.sound.play();
       this.playerSequence.push(clickedTile);
       this.determineTurnOutcome();
@@ -154,13 +150,13 @@ export default {
       setTimeout(() => {
         this.roundWon = false;
         this.nextRound();
-      }, 1000);
+      }, this.newTileDelay);
     },
     onSelectDifficulty: function (delay) {
       this.newTileDelay = delay;
     },
-    findTileById: function (id) {
-      return this.tiles.find((tile) => tile.id === id);
+    findTileByColor: function (color) {
+      return this.tiles.find((tile) => tile.color === color);
     },
     resetGame: function (message) {
       alert(message);
