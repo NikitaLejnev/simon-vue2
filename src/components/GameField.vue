@@ -138,14 +138,16 @@ export default {
         return;
       }
       if (this.playerSequence.length === this.sequence.length) {
-        this.roundWon = true;
-        this.playerSequence = [];
-        setTimeout(() => {
-          this.roundWon = false;
-          this.nextRound();
-        }, 1000);
-        return;
+        return this.winRound();
       }
+    },
+    winRound: function () {
+      this.roundWon = true;
+      this.playerSequence = [];
+      setTimeout(() => {
+        this.roundWon = false;
+        this.nextRound();
+      }, 1000);
     },
     onSelectDifficulty: function (delay) {
       this.newTileDelay = delay;
