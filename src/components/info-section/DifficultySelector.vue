@@ -3,7 +3,7 @@
     <button
       v-for="difficultyLevel in difficultyLevels"
       :key="difficultyLevel.id"
-      @click="$emit('select-difficulty', difficultyLevel.id)"
+      @click="$emit('select-difficulty', difficultyLevel.delay)"
     >
       {{ difficultyLevel.name }}
     </button>
@@ -19,14 +19,17 @@ export default {
         {
           name: "Easy",
           id: "easy",
+          delay: 1500,
         },
         {
           name: "Medium",
           id: "medium",
+          delay: 1000,
         },
         {
           name: "Hard",
           id: "hard",
+          delay: 400,
         },
       ],
     };

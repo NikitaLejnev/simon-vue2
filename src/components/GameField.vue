@@ -8,7 +8,7 @@
 
     <info-section
       @game-start="this.startGame"
-      @select-difficulty="handleSelectDifficulty"
+      @select-difficulty="this.onSelectDifficulty"
       :gameStatus="this.gameStarted"
       >{{ this.infoText }}</info-section
     >
@@ -66,7 +66,6 @@ export default {
       playerTurn: false,
       roundWon: false,
       level: 0,
-      difficulty: "easy",
       newTileDelay: 1500,
     };
   },
@@ -129,39 +128,27 @@ export default {
       }, this.level * this.newTileDelay + userInputDelay);
     },
     handleTileClick: function (id) {
-      if (this.playerTurn) {
-        const clickedTile = this.findTileById(id);
-        clickedTile.sound.play();
-        this.playerSequence.push(clickedTile);
-        const index = this.playerSequence.length - 1;
+      const clickedTile = this.findTileById(id);
+      clickedTile.sound.play();
+      this.playerSequence.push(clickedTile);
+      const index = this.playerSequence.length - 1;
 
-        if (this.sequence[index] !== this.playerSequence[index]) {
-          this.resetGame("Wrong tile. Game over.");
-          return;
-        }
-        if (this.playerSequence.length === this.sequence.length) {
-          this.roundWon = true;
-          this.playerSequence = [];
-          setTimeout(() => {
-            this.roundWon = false;
-            this.nextRound();
-          }, 1000);
-          return;
-        }
+      if (this.sequence[index] !== this.playerSequence[index]) {
+        this.resetGame("Wrong tile. Game over.");
+        return;
+      }
+      if (this.playerSequence.length === this.sequence.length) {
+        this.roundWon = true;
+        this.playerSequence = [];
+        setTimeout(() => {
+          this.roundWon = false;
+          this.nextRound();
+        }, 1000);
+        return;
       }
     },
-    handleSelectDifficulty: function (id) {
-      switch (id) {
-        case "easy":
-          this.newTileDelay = 1500;
-          break;
-        case "medium":
-          this.newTileDelay = 1000;
-          break;
-        case "hard":
-          this.newTileDelay = 400;
-          break;
-      }
+    onSelectDifficulty: function (delay) {
+      this.newTileDelay = delay;
     },
     findTileById: function (id) {
       return this.tiles.find((tile) => tile.id === id);
