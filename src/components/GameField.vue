@@ -17,7 +17,7 @@
 
 <script>
 import InfoSection from "./InfoSection.vue";
-import TileContainer from "./TileContainer.vue";
+import TileContainer from "./game-field/TileContainer.vue";
 export default {
   name: "App",
   components: {
