@@ -118,14 +118,17 @@ export default {
     },
     playRound: function () {
       const userInputDelay = 500;
+      this.displaySequence();
+      setTimeout(() => {
+        this.playerTurn = true;
+      }, this.level * this.newTileDelay + userInputDelay);
+    },
+    displaySequence: function () {
       this.sequence.forEach((tile, index) => {
         setTimeout(() => {
           this.activateTile(tile);
         }, (index + 1) * this.newTileDelay);
       });
-      setTimeout(() => {
-        this.playerTurn = true;
-      }, this.level * this.newTileDelay + userInputDelay);
     },
     handleTileClick: function (id) {
       const clickedTile = this.findTileById(id);
