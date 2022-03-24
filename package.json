@@ -1,7 +1,8 @@
 {
   "name": "simon-vue2",
+  "homepage": "https://nikitalejnev.github.io/simon-vue2/",
   "version": "0.1.0",
-  "private": true,
+  "private": "false",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
