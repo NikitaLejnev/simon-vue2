@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import DifficultySelector from "./DifficultySelector.vue";
-import InfoDisplay from "./InfoDisplay.vue";
-import StartButton from "./StartButton.vue";
+import DifficultySelector from "./info-section/DifficultySelector.vue";
+import InfoDisplay from "./info-section/InfoDisplay.vue";
+import StartButton from "./info-section/StartButton.vue";
 export default {
   name: "InfoSection",
   components: {

@@ -93,8 +93,8 @@ export default {
 #yellow:focus {
   background-color: #e7ae0f;
   box-shadow: 0 0 0 1px #e7ae0f inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset,
-    0 8px 0 0 #c28e07, 0 8px 0 1px rgba(0, 0, 0, 0.4),
-    0 8px 8px 1px rgba(0, 0, 0, 0.5);
+    0 10px 0 0 #c28e07, 0 10px 0 1px rgba(0, 0, 0, 0.4),
+    0 10px 8px 1px rgba(0, 0, 0, 0.5);
 }
 
 #yellow:active,
