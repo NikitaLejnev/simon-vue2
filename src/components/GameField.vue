@@ -134,8 +134,7 @@ export default {
       const index = this.playerSequence.length - 1;
 
       if (this.sequence[index] !== this.playerSequence[index]) {
-        this.resetGame("Wrong tile. Game over.");
-        return;
+        return this.resetGame("Wrong tile. Game over.");
       }
       if (this.playerSequence.length === this.sequence.length) {
         return this.winRound();
