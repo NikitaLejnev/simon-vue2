@@ -13,13 +13,13 @@
     <footer class="info-section">
       <button
         class="start-button"
-        :class="{ hidden: isStartButtonHidden }"
+        :class="{ hidden: isGameOn }"
         @click="startGame()"
       >
         Start
       </button>
       <difficulty-selector
-        :class="{ hidden: isStartButtonHidden }"
+        :class="{ hidden: isGameOn }"
         @select-difficulty="handleSelectDifficulty"
       ></difficulty-selector>
       <span class="info" :class="{ hidden: isInfoShown }">{{
@@ -85,7 +85,7 @@ export default {
     };
   },
   computed: {
-    isStartButtonHidden: {
+    isGameOn: {
       get: function () {
         return this.gameStarted;
       },

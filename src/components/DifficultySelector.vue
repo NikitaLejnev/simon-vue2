@@ -34,4 +34,21 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#difficulty-selector > button {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  margin: 0.5rem 0.5rem;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>
