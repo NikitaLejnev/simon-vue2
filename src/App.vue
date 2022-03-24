@@ -11,13 +11,10 @@
     ></tile-container>
 
     <footer class="info-section">
-      <button
-        class="start-button"
+      <start-button
+        @game-start="this.startGame"
         :class="{ hidden: isGameOn }"
-        @click="startGame()"
-      >
-        Start
-      </button>
+      ></start-button>
       <difficulty-selector
         :class="{ hidden: isGameOn }"
         @select-difficulty="handleSelectDifficulty"
@@ -31,12 +28,14 @@
 
 <script>
 import DifficultySelector from "./components/DifficultySelector.vue";
+import StartButton from "./components/StartButton.vue";
 import TileContainer from "./components/TileContainer.vue";
 export default {
   name: "App",
   components: {
     "tile-container": TileContainer,
     "difficulty-selector": DifficultySelector,
+    "start-button": StartButton,
   },
   data() {
     return {

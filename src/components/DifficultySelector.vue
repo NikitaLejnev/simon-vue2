@@ -40,6 +40,8 @@ export default {
   background-color: #6c757d;
   border-color: #6c757d;
   margin: 0.5rem 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   text-align: center;
   font-size: 14px;
   font-weight: 600;
@@ -50,5 +52,11 @@ export default {
   white-space: nowrap;
   border-radius: 4px;
   cursor: pointer;
+}
+
+#difficulty-selector > button:hover {
+  color: #333;
+  border-color: #888;
+  outline: 0;
 }
 </style>
