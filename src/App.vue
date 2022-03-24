@@ -8,34 +8,25 @@
       @tile-click="handleTileClick"
     ></tile-container>
 
-    <section class="info-section">
-      <start-button
-        @game-start="this.startGame"
-        :class="{ hidden: isGameOn }"
-      ></start-button>
-      <difficulty-selector
-        :class="{ hidden: isGameOn }"
-        @select-difficulty="handleSelectDifficulty"
-      ></difficulty-selector>
-      <info-display :gameOn="isGameOn">{{ this.infoText }}</info-display>
-    </section>
+    <info-section
+      @game-start="this.startGame"
+      @select-difficulty="handleSelectDifficulty"
+      :gameStatus="this.gameStarted"
+      >{{ this.infoText }}</info-section
+    >
   </main>
 </template>
 
 <script>
-import DifficultySelector from "./components/DifficultySelector.vue";
-import InfoDisplay from "./components/InfoDisplay.vue";
+import InfoSection from "./components/InfoSection.vue";
 import PageHeader from "./components/PageHeader.vue";
-import StartButton from "./components/StartButton.vue";
 import TileContainer from "./components/TileContainer.vue";
 export default {
   name: "App",
   components: {
     "tile-container": TileContainer,
-    "difficulty-selector": DifficultySelector,
-    "start-button": StartButton,
     "page-header": PageHeader,
-    "info-display": InfoDisplay,
+    "info-section": InfoSection,
   },
   data() {
     return {
@@ -84,11 +75,6 @@ export default {
     };
   },
   computed: {
-    isGameOn: {
-      get: function () {
-        return this.gameStarted;
-      },
-    },
     areTilesUnclickable: {
       get: function () {
         return !this.playerTurn;

@@ -23,18 +23,6 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.hidden {
-  display: none !important;
-}
-
-.info-section {
-  text-align: center;
-}
-
-.info {
-  font-size: 22px;
-}
-
 @media screen and (max-width: 550px) {
   .game {
     width: 100%;

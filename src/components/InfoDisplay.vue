@@ -11,4 +11,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.info {
+  font-size: 22px;
+}
+</style>
