@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="tile-container js-container"
-    :class="{ unclickable: isUnclickable }"
-  >
+  <div id="tile-container" :class="{ unclickable: isUnclickable }">
     <color-tile
       v-for="tile in tiles"
       v-bind="tile"
@@ -21,4 +18,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#tile-container {
+  display: grid;
+  grid-template-rows: 180px 180px;
+  grid-template-columns: 180px 180px;
+  grid-gap: 25px;
+  position: relative;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.unclickable {
+  pointer-events: none;
+}
+</style>
