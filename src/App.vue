@@ -17,15 +17,14 @@
         :class="{ hidden: isGameOn }"
         @select-difficulty="handleSelectDifficulty"
       ></difficulty-selector>
-      <span class="info" :class="{ hidden: !isGameOn }">{{
-        this.infoText
-      }}</span>
+      <info-display :gameOn="isGameOn">{{ this.infoText }}</info-display>
     </section>
   </main>
 </template>
 
 <script>
 import DifficultySelector from "./components/DifficultySelector.vue";
+import InfoDisplay from "./components/InfoDisplay.vue";
 import PageHeader from "./components/PageHeader.vue";
 import StartButton from "./components/StartButton.vue";
 import TileContainer from "./components/TileContainer.vue";
@@ -36,6 +35,7 @@ export default {
     "difficulty-selector": DifficultySelector,
     "start-button": StartButton,
     "page-header": PageHeader,
+    "info-display": InfoDisplay,
   },
   data() {
     return {
@@ -75,8 +75,8 @@ export default {
       ],
       gameStarted: false,
       sequence: [],
-      playerTurn: false,
       playerSequence: [],
+      playerTurn: false,
       roundWon: false,
       level: 0,
       difficulty: "easy",
@@ -103,14 +103,13 @@ export default {
       get: function () {
         if (this.roundWon) {
           return "Correct! Onto the next level.";
-        } else {
-          if (this.playerTurn) {
-            return `Pick ${this.remainingTaps} tile${
-              this.remainingTaps > 1 ? "s" : ""
-            }`;
-          }
-          return "Observe ...";
         }
+        if (this.playerTurn) {
+          return `Pick ${this.remainingTaps} tile${
+            this.remainingTaps > 1 ? "s" : ""
+          }`;
+        }
+        return "Observe ...";
       },
     },
     remainingTaps: function () {
